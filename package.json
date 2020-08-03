@@ -1,0 +1,25 @@
+{
+  "name": "student-mangemnt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.14",
+    "cron": "^1.8.2",
+    "joi": "^17.1.1",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "redis": "^3.0.2",
+    "restify": "^8.5.1",
+    "sequelize": "^6.3.4",
+    "umzug": "^2.3.0"
+  }
+}
