@@ -11,12 +11,14 @@ app.post('/addCompany', companyController.createCompany);
 app.post('/addUser',userController.createUser);
 app.get('/getUsers',userController.getUsers);
 app.get('/getSingleUser/:id', userCache.getUserCache,userController.getSingleUser);
+app.put('/updateUser', userController.updateUser);
+app.del('/deleteUser/:id', userController.deleteUser);
 
 
 app.get('/', (req, res, next) => {
     res.send("Server Started..");
-})
+});
 
 app.listen(3000, ()=>{
     console.log("Server Started..");
-})
+});
