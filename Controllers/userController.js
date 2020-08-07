@@ -8,17 +8,18 @@ const Joi = require('joi');
 
 exports.createUser = (req, res, next) => {
     const schema = Joi.object().keys({
-        email : Joi.string().trim().email().required(),
         firstName: Joi.string().alphanum().min(3).max(30).required(),
         lastName: Joi.string().alphanum().min(3).max(30).required(),
-        CompanyId : Joi.number().integer().min(1).max(1000)
+        email : Joi.string().trim().email().required(),
+        // CompanyId : Joi.number().integer().min(1).max(9999999999),
+        CompanyId : Joi.string().length(10).pattern(/^[0-9]+$/).required()
     });
-    
+
     const user = {
         email : req.body.email,
         firstName: req.body.firstname,
         lastName: req.body.lastname,
-        CompanyId: req.body.CompanyId   
+        CompanyId: req.body.CompanyId
     }
 
     const { error, value } = schema.validate(user);
@@ -29,13 +30,13 @@ exports.createUser = (req, res, next) => {
         Models.User.create(user).then((doc)=>{
             res.send(200,doc);
             logger.info("User found", doc.firstName );
-            client.setex(req.body.email, 3600,JSON.stringify(user));  
+            client.setex(req.body.email, 3600,JSON.stringify(user));
         }).catch(err => {
             console.log(err);
         });
 
     }
-    
+
 }
 
 exports.getUsers = (req, res, next) => {
@@ -55,7 +56,7 @@ exports.getSingleUser = (req, res, next) =>{
     }).then(doc => {
         res.send(200, doc);
         logger.info("User found", doc.firstName );
-        client.setex(req.params.id, 3600, JSON.parse(doc));  
+        client.setex(req.params.id, 3600, JSON.parse(doc));
     }).catch(err =>{
         console.log(err);
         res.send(400, err);
