@@ -11,14 +11,14 @@ exports.createUser = (req, res, next) => {
         firstName: Joi.string().alphanum().min(3).max(30).required(),
         lastName: Joi.string().alphanum().min(3).max(30).required(),
         email : Joi.string().trim().email().required(),
-        // CompanyId : Joi.number().integer().min(1).max(9999999999),
-        CompanyId : Joi.string().length(10).pattern(/^[0-9]+$/).required()
-    });
+        CompanyId : Joi.number().integer().min(1).max(99)
+        // CompanyId : Joi.string().length(10).pattern(/^[0-9]+$/).required()
 
+      });
     const user = {
-        email : req.body.email,
         firstName: req.body.firstname,
         lastName: req.body.lastname,
+        email : req.body.email,
         CompanyId: req.body.CompanyId
     }
 
